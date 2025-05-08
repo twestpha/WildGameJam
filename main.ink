@@ -1,7 +1,41 @@
-Once upon a time... then there were some more words...?
+INCLUDE rooms.ink
+INCLUDE encyclopedia.ink
+INCLUDE animals.ink
 
- * There were two choices.
- * There were four lines of content.
+// https://videlais.com/2018/08/09/learning-ink-part-7-global-temporary-and-constant-variables/
 
-- They lived happily ever after.
-    -> END
+// Items
+VAR hasFlashlight = false
+
+// Other global variables
+
+Once upon a time, we went to a cool place.
+-> ThisIsAKnot
+
+=== ThisIsAKnot ===
+Here's where we talk about the knot we just got to
++ Here's a choice A -> DescribeTheChoice
++ Here's a choice B -> DoneWithChoices
+
+=== DescribeTheChoice ===
+You think about your choices. -> DoneWithChoices
+
+=== DoneWithChoices ===
+
+Let's talk about a room.
+->Room.Conservatory
+
+-> END
+
+
+// Hacky pseudocode
+
+// while(alive){
+//     ShowScene(currentScene)
+//     GenerateAnimalsForScene(currentScene)
+//     ResolveFollowingAnimals()
+//     ShowAnimalsInScene()
+//     PromptForPhotoOps()
+//     PromptForActivities()
+//     PromptForNextScene()
+// }
