@@ -15,28 +15,50 @@ VAR hasFlashlight = false
 // Room Tracking
 VAR currentRoom = "lab"
 
+// Animals
+VAR dolphinInRoom = false
+
 ->Main.GameLoop
+
+// Some allie notes
+// -> Stitch ->
+// is the syntax for saying "hey go to stitch and then return like a function
+// using the ->-> syntax. Super helpful for organization.
+// https://videlais.com/2018/08/11/learning-ink-part-9-tunnels-and-threads/
 
 === Main ===
 = GameLoop
-    // While alive
-    + {playerHealth > 0}
-        ->Room.ShowCurrentRoom
-    -> END
+    // Maybe this check should happen more often/elsewhere
+    {playerHealth <= 0: -> PlayerDied}
+    
+    -> Room.ShowCurrentRoom ->
+    
+    // Generate animals based on room and following status
+    // Show animal hints
+    // Prompt for encyclopedia here?
+    
+    // Resolve animal-combination logic to display photo ops, prompt for those
+    
+    // Set out options for player action:
+    // Taking photos
+    // Managing inventory
+    // Interacting with animals
+    // Changing room
+    
+    -> Room.PromptForNextRoom ->
+    
+    // Test health management
+    ~ playerHealth--
+    
+    // Restart loop!
+    -> GameLoop
+    
+= PlayerDied
+    Oh no, too bad!
+    
+    // Reset everything using #restart? Or just some things and then point back? Iunno yet
+    ~playerHealth = 3
 
-// So, knots don't really "return" from stiches, so these are entry points from other things to link back to the main flow... I don't really love this, and it feels like I'm doing something wrong, but oh well. Hash tag game jam.
-= GameLoopContinue0
-    ->Room.PromptForNextRoom
-
-// Go around again!
-= GameLoopContinue1
-    ->GameLoop
+    + [Restart?] -> Main.GameLoop
     
 -> END
-
-// Functions we might need later?
-// GenerateAnimalsForScene(currentScene)
-// ResolveFollowingAnimals()
-// ShowAnimalsInScene()
-// PromptForPhotoOps()
-// PromptForActivities()
