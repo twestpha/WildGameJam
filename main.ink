@@ -18,6 +18,9 @@ VAR currentRoom = "lab"
 // Animals
 VAR dolphinInRoom = false
 
+// How the fuck do I seed this from time lol
+// ~SEED_RANDOM(122)
+
 ->Main.GameLoop
 
 // Some allie notes
@@ -28,22 +31,22 @@ VAR dolphinInRoom = false
 
 === Main ===
 = GameLoop
-    // Maybe this check should happen more often/elsewhere
-    {playerHealth <= 0: -> PlayerDied}
-    
     -> Room.ShowCurrentRoom ->
     
-    // Generate animals based on room and following status
-    // Show animal hints
-    // Prompt for encyclopedia here?
+    -> Animals.GenerateAnimalsForRoom ->
+    -> Animals.ShowAnimals ->
     
     // Resolve animal-combination logic to display photo ops, prompt for those
     
     // Set out options for player action:
     // Taking photos
+    // Encyclopedia
     // Managing inventory
     // Interacting with animals
     // Changing room
+    
+    // Maybe this check should happen more often/elsewhere
+    {playerHealth <= 0: -> PlayerDied}
     
     -> Room.PromptForNextRoom ->
     
@@ -54,7 +57,7 @@ VAR dolphinInRoom = false
     -> GameLoop
     
 = PlayerDied
-    Oh no, too bad!
+    You died! Oh no, too bad!
     
     // Reset everything using #restart? Or just some things and then point back? Iunno yet
     ~playerHealth = 3

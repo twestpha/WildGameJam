@@ -1,13 +1,25 @@
 === Animals ===
 
-= Laboratory
-It's got cool posters of girls butts
--> END
+= GenerateAnimalsForRoom
+// to do, put a clear-all animals here
 
-= Lawn
-It's got cool posters of girls butts
--> END
+{currentRoom == "lab":
+    // A 50% chance
+    ~dolphinInRoom = RANDOM(0, 99) < 50
+}
+{currentRoom == "conservatory":
+    // A 0% chance
+    ~dolphinInRoom = false
+}
 
-= Conservatory
-It's got cool posters of girls butts
--> END
+// Resolve animals following the player here too
+
+->->
+
+= ShowAnimals
+{dolphinInRoom: -> ShowDolphin ->}
+->->
+
+= ShowDolphin
+Oooh a pretty dolphin description goes here
+->->
