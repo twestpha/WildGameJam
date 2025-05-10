@@ -4,38 +4,39 @@ INCLUDE animals.ink
 
 // https://videlais.com/2018/08/09/learning-ink-part-7-global-temporary-and-constant-variables/
 
+// Global state variables
+VAR playerHealth = 3
+
+VAR dolphinFollowingPlayer = false
+
 // Items
 VAR hasFlashlight = false
 
-// Other global variables
+// Room Tracking
+VAR currentRoom = "lab"
 
-Once upon a time, we went to a cool place.
--> ThisIsAKnot
+->Main.GameLoop
 
-=== ThisIsAKnot ===
-Here's where we talk about the knot we just got to
-+ Here's a choice A -> DescribeTheChoice
-+ Here's a choice B -> DoneWithChoices
+=== Main ===
+= GameLoop
+    // While alive
+    + {playerHealth > 0}
+        ->Room.ShowCurrentRoom
+    -> END
 
-=== DescribeTheChoice ===
-You think about your choices. -> DoneWithChoices
+// So, knots don't really "return" from stiches, so these are entry points from other things to link back to the main flow... I don't really love this, and it feels like I'm doing something wrong, but oh well. Hash tag game jam.
+= GameLoopContinue0
+    ->Room.PromptForNextRoom
 
-=== DoneWithChoices ===
-
-Let's talk about a room.
-->Room.Conservatory
-
+// Go around again!
+= GameLoopContinue1
+    ->GameLoop
+    
 -> END
 
-
-// Hacky pseudocode
-
-// while(alive){
-//     ShowScene(currentScene)
-//     GenerateAnimalsForScene(currentScene)
-//     ResolveFollowingAnimals()
-//     ShowAnimalsInScene()
-//     PromptForPhotoOps()
-//     PromptForActivities()
-//     PromptForNextScene()
-// }
+// Functions we might need later?
+// GenerateAnimalsForScene(currentScene)
+// ResolveFollowingAnimals()
+// ShowAnimalsInScene()
+// PromptForPhotoOps()
+// PromptForActivities()
