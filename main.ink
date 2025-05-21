@@ -11,6 +11,7 @@ VAR dolphinFollowingPlayer = false
 
 // Items
 VAR hasFlashlight = false
+VAR hasFruit = false
 
 // Room Tracking
 VAR currentRoom = "lab"
@@ -51,7 +52,7 @@ VAR dolphinInRoom = false
     -> Room.PromptForNextRoom ->
     
     // Test health management
-    ~ playerHealth--
+    // ~ playerHealth--
     
     // Restart loop!
     -> GameLoop
